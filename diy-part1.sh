@@ -15,6 +15,6 @@
 
 # Add a feed source
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;1.29-1
-src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main
-src-git-full x https://github.com/CHUNGSEV/X.git
+src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git;1.29-1 >>feeds.conf.default
+src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main >>feeds.conf.default
+src-git-full x https://github.com/CHUNGSEV/X.git >>feeds.conf.default
