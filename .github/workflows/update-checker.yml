@@ -13,8 +13,8 @@
 name: Update Checker
 
 env:
-  REPO_URL: https://github.com/CHUNGSEV/V23.05.3.git
-  REPO_BRANCH: main
+  REPO_URL: https://github.com/openwrt/openwrt.git
+  REPO_BRANCH: v23.05.3
 
 on:
   workflow_dispatch:
