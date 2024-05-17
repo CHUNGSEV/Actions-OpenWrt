@@ -59,8 +59,8 @@ jobs:
 
     - name: delete & add golang    
       run: |
-        rm -r /GITHUB_WORKSPACE/openwrt/feeds/packages/lang/golang/golang/Makefile
-        wget -qO- https://raw.githubusercontent.com/openwrt/packages/master/lang/golang/golang/Makefile > GITHUB_WORKSPACE/openwrt/feeds/packages/lang/golang/golang/Makefile
+        rm -r /workdir/openwrt/feeds/packages/lang/golang/golang/Makefile
+        wget -qO- https://raw.githubusercontent.com/openwrt/packages/master/lang/golang/golang/Makefile > /workdir/openwrt/feeds/packages/lang/golang/golang/Makefile
         
     - name: Load custom feeds
       run: |
