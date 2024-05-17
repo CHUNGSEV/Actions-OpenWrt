@@ -57,6 +57,11 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
+    - name: delete & add golang    
+      run: |
+        rm -r /GITHUB_WORKSPACE/openwrt/feeds/packages/lang/golang/golang/Makefile
+        wget -qO- https://raw.githubusercontent.com/openwrt/packages/master/lang/golang/golang/Makefile > GITHUB_WORKSPACE/openwrt/feeds/packages/lang/golang/golang/Makefile
+        
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
