@@ -71,6 +71,7 @@ jobs:
       run: |
         rm -r /workdir/openwrt/feeds/packages/lang/golang/golang/Makefile
         rm -r /workdir/openwrt/feeds/packages/net/curl/patches/200-no_docs_tests.patch
+        rm -r /workdir/openwrt/feeds/packages/net/curl/patches/010-mbedtls-v3.6.0-workarounds.patch
         rm -r /workdir/openwrt/feeds/packages/net/curl/Makefile
         wget -qO- https://raw.githubusercontent.com/openwrt/packages/master/lang/golang/golang/Makefile > /workdir/openwrt/feeds/packages/lang/golang/golang/Makefile
         wget -qO- https://raw.githubusercontent.com/openwrt/packages/openwrt-23.05/net/curl/patches/200-no_docs_tests.patch > /workdir/openwrt/feeds/packages/net/curl/patches/200-no_docs_tests.patch
