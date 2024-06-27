@@ -87,7 +87,8 @@ jobs:
       id: package
       run: |
         cd openwrt
-        make kernel_menuconfig
+        echo -e "$(nproc) thread compile"
+        make -j$(nproc) kernel_menuconfig
        
     - name: compile    
       run: |
