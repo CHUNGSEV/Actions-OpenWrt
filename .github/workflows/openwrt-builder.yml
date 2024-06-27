@@ -87,9 +87,8 @@ jobs:
       id: package
       run: |
         cd openwrt
-        make defconfig
-        make clean
         make kernel_menuconfig
+        make defconfig
        
     - name: compile    
       run: |
