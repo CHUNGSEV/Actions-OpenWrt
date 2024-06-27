@@ -87,17 +87,14 @@ jobs:
       id: package
       run: |
         cd openwrt
+        make defconfig
+        make clean
         make kernel_menuconfig
         rm -r /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/net/usb/qmi_wwan.c
         rm -r /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/usb/serial/option.c
         wget -qO- https://raw.githubusercontent.com/CHUNGSEV/A/main/option.c > /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/usb/serial/option.c
         wget -qO- https://raw.githubusercontent.com/CHUNGSEV/A/main/qmi_wwan.c > /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/net/usb/qmi_wwan.c
         make target/linux/compile
-        make defconfig
-        make clean
-        make download -j8
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
 
     - name: Compile the firmware
       id: compile
