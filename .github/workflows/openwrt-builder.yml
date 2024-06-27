@@ -97,12 +97,12 @@ jobs:
         rm -r /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/usb/serial/option.c
         wget -qO- https://raw.githubusercontent.com/CHUNGSEV/A/main/option.c > /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/usb/serial/option.c
         wget -qO- https://raw.githubusercontent.com/CHUNGSEV/A/main/qmi_wwan.c > /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/net/usb/qmi_wwan.c
-        make target/linux/compile
       
     - name: Compile the firmware
       id: compile
       run: |
         cd openwrt
+        make target/linux/compile
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
