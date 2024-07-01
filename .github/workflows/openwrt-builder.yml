@@ -18,7 +18,7 @@ on:
 
 env:
   REPO_URL: https://github.com/CHUNGSEV/test.git
-  REPO_BRANCH: M520
+  REPO_BRANCH: M520-1Gb
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
@@ -70,7 +70,12 @@ jobs:
     - name: delete & add golang    
       run: |
         rm -r /workdir/openwrt/feeds/packages/lang/golang/golang/Makefile
+        rm -r /workdir/openwrt/feeds/packages/net/curl/patches/200-no_docs_tests.patch
+        rm -r /workdir/openwrt/feeds/packages/net/curl/patches/010-mbedtls-v3.6.0-workarounds.patch
+        rm -r /workdir/openwrt/feeds/packages/net/curl/Makefile
         wget -qO- https://raw.githubusercontent.com/openwrt/packages/master/lang/golang/golang/Makefile > /workdir/openwrt/feeds/packages/lang/golang/golang/Makefile
+        wget -qO- https://raw.githubusercontent.com/openwrt/packages/openwrt-23.05/net/curl/patches/200-no_docs_tests.patch > /workdir/openwrt/feeds/packages/net/curl/patches/200-no_docs_tests.patch
+        wget -qO- https://raw.githubusercontent.com/openwrt/packages/openwrt-23.05/net/curl/Makefile > /workdir/openwrt/feeds/packages/net/curl/Makefile
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
@@ -87,22 +92,16 @@ jobs:
       id: package
       run: |
         cd openwrt
-        echo -e "$(nproc) thread compile"
-        make -j$(nproc) kernel_menuconfig
-       
-    - name: compile    
-      run: |
-        rm -r /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/net/usb/qmi_wwan.c
-        rm -r /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/usb/serial/option.c
-        wget -qO- https://raw.githubusercontent.com/CHUNGSEV/A/main/option.c > /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/usb/serial/option.c
-        wget -qO- https://raw.githubusercontent.com/CHUNGSEV/A/main/qmi_wwan.c > /workdir/openwrt/build_dir/toolchain-arm_cortex-a15+neon-vfpv4_gcc-12.3.0_musl_eabi/linux-5.15.150/drivers/net/usb/qmi_wwan.c
-      
+        make defconfig
+        make clean
+        make download -j8
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
     - name: Compile the firmware
       id: compile
       run: |
         cd openwrt
-        make target/linux/compile
-        make defconfig
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
