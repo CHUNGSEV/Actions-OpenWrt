@@ -13,8 +13,8 @@
 name: Update Checker
 
 env:
-  REPO_URL: https://github.com/CHUNGSEV/test.git
-  REPO_BRANCH: M520-1Gb
+  REPO_URL: https://github.com/msdos03/openwrt-avanta.git
+  REPO_BRANCH: avanta-snapshot
 
 on:
   workflow_dispatch:
