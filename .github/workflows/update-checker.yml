@@ -13,8 +13,8 @@
 name: Update Checker
 
 env:
-  REPO_URL: https://github.com/x-wrt/x-wrt.git
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/CHUNGSEV/test.git
+  REPO_BRANCH: 23.05.4
 
 on:
   workflow_dispatch:
