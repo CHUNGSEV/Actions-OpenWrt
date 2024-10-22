@@ -69,7 +69,8 @@ jobs:
 
     - name: Update mv file
       run: |
-        [ -e luci-app-mwan3 ] && mv -f luci-app-mwan3 /workdir/openwrt/feeds/luci/applications/luci-app-mwan3
+        rm -r /workdir/openwrt/feeds/luci/applications/luci-app-mwan3
+        cd openwrt && mv -f luci-app-mwan3 /workdir/openwrt/feeds/luci/applications/
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
